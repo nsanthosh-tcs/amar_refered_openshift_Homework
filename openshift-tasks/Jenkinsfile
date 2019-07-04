@@ -1,5 +1,5 @@
 #!groovy
-def GUID="2c88"
+def GUID="1308"
 def devProject = "${GUID}-tasks-dev"
 def prodProject = "${GUID}-tasks-prod"
 def JOB_BASE_NAME = "HierKoennteIhreWerbungStehen"
