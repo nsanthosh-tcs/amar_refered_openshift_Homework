@@ -11,10 +11,6 @@ GUID=$1
 REPO=$2
 CLUSTER=$3
 
-# export GUID=2c88							                          # noch an Homework GUID anpassen!
-# export REPO=https://github.com/DevOpsDirk/homework			# noch an repo anpassen!
-# export CLUSTER=na311.openshift.opentlc.com				      # noch an Homework Cluster anpassen!
-
 
 echo "Setting up Jenkins in project ${GUID}-jenkins from Git Repo ${REPO} for Cluster ${CLUSTER}"
 # Set up Jenkins with sufficient resources
@@ -52,7 +48,6 @@ oc -n $GUID-jenkins new-build ${REPO} \
    --context-dir openshift-tasks \
    --name=tasks-pipeline
 
-# why doesn`t the above not work? where is "name: tasks-pipeline" to be set? regards - Dirk
 #echo "apiVersion: v1
 #items:
 #- kind: "BuildConfig"
