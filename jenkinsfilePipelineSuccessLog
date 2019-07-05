@@ -1,0 +1,393 @@
+Build Number: #2239  [05/07/2019]
+Started by user amar.chourasiya-tcs.com
+Obtained Jenkinsfile from git https://github.com/redhat-gpte-devopsautomation/advdev_homework_grading
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] podTemplate
+[Pipeline] {
+[Pipeline] node
+Still waiting to schedule task
+homework-r18st-j6lj4 is offline
+Agent homework-r18st-j6lj4 is provisioned from template Kubernetes Pod Template
+Agent specification [Kubernetes Pod Template] (homework): 
+* [jnlp] docker-registry.default.svc:5000/gpte-jenkins/jenkins-agent-appdev:latest(resourceRequestCpu: 1, resourceRequestMemory: 1Gi, resourceLimitCpu: 2, resourceLimitMemory: 2Gi)
+
+Running on homework-r18st-j6lj4 in /home/jenkins/workspace/Advanced Development Homework Grading
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Cloning the remote Git repository
+Cloning repository https://github.com/redhat-gpte-devopsautomation/advdev_homework_grading
+ > git init /home/jenkins/workspace/Advanced Development Homework Grading # timeout=10
+Fetching upstream changes from https://github.com/redhat-gpte-devopsautomation/advdev_homework_grading
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/redhat-gpte-devopsautomation/advdev_homework_grading +refs/heads/*:refs/remotes/origin/*
+ > git config remote.origin.url https://github.com/redhat-gpte-devopsautomation/advdev_homework_grading # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/redhat-gpte-devopsautomation/advdev_homework_grading # timeout=10
+Fetching upstream changes from https://github.com/redhat-gpte-devopsautomation/advdev_homework_grading
+ > git fetch --tags --progress https://github.com/redhat-gpte-devopsautomation/advdev_homework_grading +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 84440594ff9713a444bb2dd08b4d854e6be39080 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 84440594ff9713a444bb2dd08b4d854e6be39080
+Commit message: "Added DISABLE_ADMINISTRATIVE_MONITORS flag to Jenkins"
+ > git rev-list --no-walk 84440594ff9713a444bb2dd08b4d854e6be39080 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] container
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Get Student Homework Repo)
+[Pipeline] echo
+*******************************************************
+*** Advanced OpenShift Development Homework Grading ***
+*** GUID:         1308
+*** USER:         amar.chourasiya-tcs.com
+*** Student Repo: *********
+*** CLUSTER:      na311.openshift.opentlc.com
+*** SETUP:        true
+*** DELETE:       true
+*******************************************************
+[Pipeline] echo
+Cloning Student Project Repository
+[Pipeline] git
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/amar134/openshift-Homework.git # timeout=10
+Fetching upstream changes from https://github.com/amar134/openshift-Homework.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/amar134/openshift-Homework.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 790d0668ae84923771e2b3a3de7ed237d28c8830 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 790d0668ae84923771e2b3a3de7ed237d28c8830
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b master 790d0668ae84923771e2b3a3de7ed237d28c8830
+Commit message: "Update setup_dev.sh"
+ > git rev-list --no-walk 790d0668ae84923771e2b3a3de7ed237d28c8830 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Create Projects)
+[Pipeline] echo
+Creating Projects
+[Pipeline] sh
+[Advanced Development Homework Grading] Running shell script
++ ./bin/setup_projects.sh 1308 amar.chourasiya-tcs.com true
+Creating Homework Projects for GUID=1308 and USER=amar.chourasiya-tcs.com
+Error from server (AlreadyExists): project.project.openshift.io "1308-jenkins" already exists
+Now using project "1308-tasks-dev" on server "https://172.30.0.1:443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app centos/ruby-22-centos7~https://github.com/openshift/ruby-ex.git
+
+to build a new example application in Ruby.
+Now using project "1308-tasks-prod" on server "https://172.30.0.1:443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app centos/ruby-22-centos7~https://github.com/openshift/ruby-ex.git
+
+to build a new example application in Ruby.
+role "admin" added: "amar.chourasiya-tcs.com"
+role "admin" added: "amar.chourasiya-tcs.com"
+role "admin" added: "amar.chourasiya-tcs.com"
+namespace "1308-jenkins" annotated
+namespace "1308-tasks-dev" annotated
+namespace "1308-tasks-prod" annotated
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Setup Infrastructure)
+[Pipeline] parallel
+[Pipeline] [Setup Jenkins] { (Branch: Setup Jenkins)
+[Pipeline] [Setup Development Project] { (Branch: Setup Development Project)
+[Pipeline] [Setup Production Project] { (Branch: Setup Production Project)
+[Pipeline] [Setup Jenkins] stage
+[Pipeline] [Setup Jenkins] { (Setup Jenkins)
+[Pipeline] [Setup Development Project] stage
+[Pipeline] [Setup Development Project] { (Setup Development Project)
+[Pipeline] [Setup Production Project] stage
+[Pipeline] [Setup Production Project] { (Setup Production Project)
+[Pipeline] [Setup Jenkins] echo
+[Setup Jenkins] Setting up Jenkins
+[Pipeline] [Setup Jenkins] sh
+[Setup Jenkins] [Advanced Development Homework Grading] Running shell script
+[Setup Jenkins] + ./bin/setup_jenkins.sh 1308 https://github.com/amar134/openshift-Homework.git na311.openshift.opentlc.com
+[Setup Jenkins] Setting up Jenkins in project 1308-jenkins from Git Repo https://github.com/amar134/openshift-Homework.git for Cluster na311.openshift.opentlc.com
+[Setup Jenkins] --> Deploying template "openshift/jenkins-ephemeral" to project 1308-jenkins
+[Setup Jenkins] 
+[Setup Jenkins]      Jenkins (Ephemeral)
+[Setup Jenkins]      ---------
+[Setup Jenkins]      Jenkins service, without persistent storage.
+[Setup Jenkins]      
+[Setup Jenkins]      WARNING: Any data stored will be lost upon pod destruction. Only use this template for testing.
+[Setup Jenkins] 
+[Setup Jenkins]      A Jenkins service has been created in your project.  Log into Jenkins with your OpenShift account.  The tutorial at https://github.com/openshift/origin/blob/master/examples/jenkins/README.md contains more information about using this template.
+[Setup Jenkins] 
+[Setup Jenkins]      * With parameters:
+[Setup Jenkins]         * Jenkins Service Name=jenkins
+[Setup Jenkins]         * Jenkins JNLP Service Name=jenkins-jnlp
+[Setup Jenkins]         * Enable OAuth in Jenkins=true
+[Setup Jenkins]         * Memory Limit=2Gi
+[Setup Jenkins]         * Jenkins ImageStream Namespace=openshift
+[Setup Jenkins]         * Disable memory intensive administrative monitors=true
+[Setup Jenkins]         * Jenkins ImageStreamTag=jenkins:2
+[Setup Jenkins] 
+[Setup Jenkins] --> Creating resources ...
+[Setup Jenkins]     error: routes.route.openshift.io "jenkins" already exists
+[Setup Jenkins]     error: deploymentconfigs.apps.openshift.io "jenkins" already exists
+[Setup Jenkins]     error: serviceaccounts "jenkins" already exists
+[Setup Jenkins]     error: rolebindings.authorization.openshift.io "jenkins_edit" already exists
+[Setup Jenkins]     error: services "jenkins-jnlp" already exists
+[Setup Jenkins]     error: services "jenkins" already exists
+[Setup Jenkins] --> Failed
+[Setup Jenkins] --> Found Docker image bac7430 (3 weeks old) from docker.io for "docker.io/openshift/jenkins-agent-maven-35-centos7:v3.11"
+[Setup Jenkins] 
+[Setup Jenkins]     OpenShift Application Platform 
+[Setup Jenkins]     ------------------------------ 
+[Setup Jenkins]     OpenShift is a platform for developing, building, and deploying containerized applications.
+[Setup Jenkins] 
+[Setup Jenkins]     Tags: openshift, core
+[Setup Jenkins] 
+[Setup Jenkins]     * An image stream will be created as "jenkins-agent-maven-35-centos7:v3.11" that will track the source image
+[Setup Jenkins]     * A Docker build using a predefined Dockerfile will be created
+[Setup Jenkins]       * The resulting image will be pushed to image stream "jenkins-agent-appdev:latest"
+[Setup Jenkins]       * Every time "jenkins-agent-maven-35-centos7:v3.11" changes a new build will be triggered
+[Setup Jenkins] 
+[Setup Jenkins] --> Creating resources with label build=jenkins-agent-appdev ...
+[Setup Jenkins]     error: buildconfigs.build.openshift.io "jenkins-agent-appdev" already exists
+[Setup Jenkins] --> Failed
+[Setup Jenkins]     * A pipeline build using source code from https://github.com/amar134/openshift-Homework.git will be created
+[Setup Jenkins]       * Use 'start-build' to trigger a new build
+[Setup Jenkins] 
+[Setup Jenkins] --> Creating resources with label build=tasks-pipeline ...
+[Setup Jenkins]     error: buildconfigs.build.openshift.io "tasks-pipeline" already exists
+[Setup Jenkins] --> Failed
+[Setup Jenkins] Checking if Jenkins is Ready...
+[Setup Jenkins] ...Yes. Jenkins is ready.
+[Pipeline] [Setup Development Project] echo
+[Setup Development Project] Setting up Development Project
+[Pipeline] [Setup Development Project] sh
+[Setup Development Project] [Advanced Development Homework Grading] Running shell script
+[Setup Development Project] + ./bin/setup_dev.sh 1308
+[Setup Development Project] Setting up Tasks Development Environment in project 1308-tasks-dev
+[Setup Development Project] role "edit" added: "system:serviceaccount:1308-jenkins:jenkins"
+[Setup Development Project] --> Found image c326e30 (16 months old) in image stream "openshift/jboss-eap71-openshift" under tag "1.1" for "openshift/jboss-eap71-openshift:1.1"
+[Setup Development Project] 
+[Setup Development Project]     JBoss EAP 7.1 
+[Setup Development Project]     ------------- 
+[Setup Development Project]     Platform for building and running JavaEE applications on JBoss EAP 7.1
+[Setup Development Project] 
+[Setup Development Project]     Tags: builder, javaee, eap, eap7
+[Setup Development Project] 
+[Setup Development Project]     * A source build using binary input will be created
+[Setup Development Project]       * The resulting image will be pushed to image stream "tasks:latest"
+[Setup Development Project]       * A binary build was created, use 'start-build --from-dir' to trigger a new build
+[Setup Development Project] 
+[Setup Development Project] --> Creating resources with label build=tasks ...
+[Setup Development Project]     imagestream "tasks" created
+[Setup Development Project]     buildconfig "tasks" created
+[Setup Development Project] --> Success
+[Setup Development Project] --> Found tag :0.0-0 in image stream "1308-tasks-dev/tasks" for "1308-tasks-dev/tasks:0.0-0"
+[Setup Development Project] 
+[Setup Development Project]     * This image will be deployed in deployment config "tasks"
+[Setup Development Project] 
+[Setup Development Project] --> Creating resources ...
+[Setup Development Project]     imagestreamtag "tasks:0.0-0" created
+[Setup Development Project]     deploymentconfig "tasks" created
+[Setup Development Project] --> Success
+[Setup Development Project]     Run 'oc status' to view your app.
+[Setup Development Project] deploymentconfig "tasks" updated
+[Setup Development Project] service "tasks" exposed
+[Setup Development Project] route "tasks" exposed
+[Setup Development Project] configmap "tasks-config" created
+[Setup Development Project] deploymentconfig "tasks" updated
+[Setup Development Project] deploymentconfig "tasks" updated
+[Setup Development Project] deploymentconfig "tasks" updated
+[Setup Development Project] deploymentconfig "tasks" updated
+[Setup Development Project] deploymentconfig "tasks" updated
+[Pipeline] [Setup Production Project] echo
+[Setup Production Project] Setting up Production Project
+[Pipeline] [Setup Production Project] sh
+[Setup Production Project] [Advanced Development Homework Grading] Running shell script
+[Setup Production Project] + ./bin/setup_prod.sh 1308
+[Setup Production Project] Setting up Tasks Production Environment in project 1308-tasks-prod
+[Setup Production Project] role "system:image-puller" added: "system:serviceaccounts:1308-tasks-prod"
+[Setup Production Project] role "edit" added: "system:serviceaccount:1308-jenkins:jenkins"
+[Setup Production Project] --> Found tag :0.0 in image stream "1308-tasks-dev/tasks" for "1308-tasks-dev/tasks:0.0"
+[Setup Production Project] 
+[Setup Production Project]     * This image will be deployed in deployment config "tasks-blue"
+[Setup Production Project] 
+[Setup Production Project] --> Creating resources ...
+[Setup Production Project]     imagestreamtag "tasks-blue:0.0" created
+[Setup Production Project]     deploymentconfig "tasks-blue" created
+[Setup Production Project] --> Success
+[Setup Production Project]     Run 'oc status' to view your app.
+[Setup Production Project] deploymentconfig "tasks-blue" updated
+[Setup Production Project] service "tasks-blue" exposed
+[Setup Production Project] configmap "tasks-blue-config" created
+[Setup Production Project] deploymentconfig "tasks-blue" updated
+[Setup Production Project] deploymentconfig "tasks-blue" updated
+[Setup Production Project] deploymentconfig "tasks-blue" updated
+[Setup Production Project] deploymentconfig "tasks-blue" updated
+[Pipeline] [Setup Jenkins] }
+[Pipeline] [Setup Development Project] }
+[Setup Production Project] deploymentconfig "tasks-blue" updated
+[Setup Production Project] --> Found tag :0.0 in image stream "1308-tasks-dev/tasks" for "1308-tasks-dev/tasks:0.0"
+[Setup Production Project] 
+[Setup Production Project]     * This image will be deployed in deployment config "tasks-green"
+[Setup Production Project] 
+[Setup Production Project] --> Creating resources ...
+[Setup Production Project]     imagestreamtag "tasks-green:0.0" created
+[Setup Production Project]     deploymentconfig "tasks-green" created
+[Setup Production Project] --> Success
+[Setup Production Project]     Run 'oc status' to view your app.
+[Setup Production Project] deploymentconfig "tasks-green" updated
+[Pipeline] [Setup Jenkins] // stage
+[Setup Production Project] service "tasks-green" exposed
+[Setup Production Project] configmap "tasks-green-config" created
+[Setup Production Project] deploymentconfig "tasks-green" updated
+[Pipeline] [Setup Development Project] // stage
+[Setup Production Project] deploymentconfig "tasks-green" updated
+[Setup Production Project] deploymentconfig "tasks-green" updated
+[Setup Production Project] deploymentconfig "tasks-green" updated
+[Pipeline] [Setup Jenkins] }
+[Pipeline] [Setup Development Project] }
+[Setup Production Project] deploymentconfig "tasks-green" updated
+[Setup Production Project] route "tasks" exposed
+[Pipeline] [Setup Production Project] }
+[Pipeline] [Setup Production Project] // stage
+[Pipeline] [Setup Production Project] }
+[Pipeline] // parallel
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Reset Projects)
+Stage "Reset Projects" skipped due to when conditional
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (First Pipeline Run (from Green to Blue))
+[Pipeline] echo
+Executing Initial Tasks Pipeline - BLUE deployment
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+
+[Pipeline] _OcContextInit
+[Pipeline] _OcContextInit
+[Pipeline] readFile
+[Pipeline] _OcAction
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test Tasks in Dev)
+[Pipeline] echo
+Testing Tasks Dev Application
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+[Advanced Development Homework Grading] Running shell script
++ curl tasks-1308-tasks-dev.apps.na311.openshift.opentlc.com
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:--  0:00:05 --:--:--     0
+100 11269  100 11269    0     0   2038      0  0:00:05  0:00:05 --:--:--  2806
+[Pipeline] echo
+*** tasks-dev validated successfully.
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test Blue Services in Prod)
+[Pipeline] echo
+Testing Prod Services (BLUE)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+[Advanced Development Homework Grading] Running shell script
++ curl tasks-1308-tasks-prod.apps.na311.openshift.opentlc.com
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100 11275  100 11275    0     0   487k      0 --:--:-- --:--:-- --:--:--  500k
+[Pipeline] echo
+*** tasks-blue validated successfully.
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Second Pipeline Run (from Blue to Green))
+[Pipeline] echo
+Executing Second Tasks Pipeline - GREEN deployment
+[Pipeline] script
+[Pipeline] {
+[Pipeline] _OcContextInit
+[Pipeline] _OcContextInit
+[Pipeline] readFile
+[Pipeline] _OcAction
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test Green Parksmap in Prod)
+[Pipeline] echo
+Testing Prod Parksmap Application (GREEN)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+[Advanced Development Homework Grading] Running shell script
++ curl tasks-1308-tasks-prod.apps.na311.openshift.opentlc.com
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:--  0:00:05 --:--:--     0
+100 11277  100 11277    0     0   2040      0  0:00:05  0:00:05 --:--:--  2808
+[Pipeline] echo
+*** tasks-green validated successfully.
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Cleanup)
+[Pipeline] echo
+Cleanup - deleting all projects for GUID=1308
+[Pipeline] sh
+[Advanced Development Homework Grading] Running shell script
++ ./bin/cleanup.sh 1308
+Removing all Homework Projects for GUID=1308
+project.project.openshift.io "1308-jenkins" deleted
+project.project.openshift.io "1308-tasks-dev" deleted
+project.project.openshift.io "1308-tasks-prod" deleted
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // podTemplate
+[Pipeline] End of Pipeline
+Finished: SUCCESS
